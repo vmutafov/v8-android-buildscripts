@@ -22,6 +22,8 @@ jobs:
         NO_JIT: ${{ !contains(matrix.variant, 'jit') }}
 
     steps:
+      - name: Print environment varariables
+        run: env | grep GITHUB | sort
       - name: Setup docker workspace
         run: |
             sudo sh -c "chown -R ubuntu $HOME"
