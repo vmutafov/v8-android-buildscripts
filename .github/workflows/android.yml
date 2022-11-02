@@ -14,7 +14,7 @@ jobs:
         variant: [intl, nointl, jit-intl, jit-nointl]
 
     container:
-      image: telosalliance/ubuntu-20.04
+      image: kudo/ubuntu-nonroot:20.04
       env:
         DEBIAN_FRONTEND: noninteractive
         TZ: UTC
