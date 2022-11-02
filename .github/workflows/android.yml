@@ -15,6 +15,7 @@ jobs:
 
     container:
       image: kudo/ubuntu-nonroot:20.04
+      options: --user root
       env:
         DEBIAN_FRONTEND: noninteractive
         TZ: UTC
