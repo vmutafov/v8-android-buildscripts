@@ -29,6 +29,7 @@ jobs:
             sudo sh -c "chown -R ubuntu $HOME"
             sudo sh -c "chmod 777 $GITHUB_WORKSPACE"
             sudo sh -c "chmod 777 $GITHUB_STATE"
+            sudo sh -c "chmod -R 777 /__w/_temp/"
             # sudo sh -c "chmod -R 0777 /__w/_temp/_runner_file_commands"
             # sudo sh -c "chmod 777 $GITHUB_ENV/../"
             # sudo sh -c "chmod 777 $GITHUB_PATH/../"
