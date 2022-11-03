@@ -8,6 +8,8 @@ ARCH=$2
 
 GN_ARGS_BASE="
   is_component_build=false
+  v8_monolithic=true
+  v8_static_library=true
   use_custom_libcxx=false
   icu_use_data_file=false
   treat_warnings_as_errors=false
@@ -96,13 +98,10 @@ function buildArch()
   local platform_arch=$(normalize_arch_for_platform $arch)
 
   local target=''
-  local target_ext=''
   if [[ ${PLATFORM} = "android" ]]; then
     target="libv8android"
-    target_ext=".so"
   elif [[ ${PLATFORM} = "ios" ]]; then
     target="libv8"
-    target_ext=".dylib"
   elif [[ ${PLATFORM} = "macos_android" ]]; then
     :
   else
@@ -130,23 +129,20 @@ function copyLib()
   local platform_arch=$(normalize_arch_for_platform $arch)
 
   local target=''
-  local target_ext=''
   if [[ ${PLATFORM} = "android" ]]; then
     target="libv8android"
-    target_ext=".so"
   elif [[ ${PLATFORM} = "ios" ]]; then
     target="libv8"
-    target_ext=".dylib"
   else
     exit 1
   fi
 
   mkdir -p "${BUILD_DIR}/lib/${platform_arch}"
-  cp -f "out.v8.${arch}/${target}${target_ext}" "${BUILD_DIR}/lib/${platform_arch}/${target}${target_ext}"
+  cp -rf "out.v8.${arch}" "${BUILD_DIR}/lib/${platform_arch}/"
 
   if [[ -d "out.v8.${arch}/lib.unstripped" ]]; then
     mkdir -p "${BUILD_DIR}/lib.unstripped/${platform_arch}"
-    cp -f "out.v8.${arch}/lib.unstripped/${target}${target_ext}" "${BUILD_DIR}/lib.unstripped/${platform_arch}/${target}${target_ext}"
+    cp -rf "out.v8.${arch}/lib.unstripped" "${BUILD_DIR}/lib.unstripped/${platform_arch}/"
   fi
 }
 
