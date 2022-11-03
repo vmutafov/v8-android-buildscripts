@@ -30,6 +30,15 @@ function createAAR() {
   popd
 }
 
+function copyAndroidTools() {
+  printf "\n\n\t\t===================== copy android tools =====================\n\n"
+  mkdir "${DIST_PACKAGE_DIR}/android"
+  mkdir "${DIST_PACKAGE_DIR}/android/ndk"
+  mkdir "${DIST_PACKAGE_DIR}/android/sdk"
+  cp -Rf "${V8_DIR}/third_party/android_ndk" "${DIST_PACKAGE_DIR}/android/ndk"
+  cp -Rf "${V8_DIR}/third_party/android_sdk" "${DIST_PACKAGE_DIR}/android/sdk"
+}
+
 function copyDylib() {
   printf "\n\n\t\t===================== copy dylib =====================\n\n"
   mkdir -p "${DIST_PACKAGE_DIR}"
@@ -75,8 +84,8 @@ if [[ ${PLATFORM} = "android" ]]; then
   yes | sdkmanager --licenses
 
   mkdir -p "${DIST_PACKAGE_DIR}"
-  createAAR
-  createUnstrippedLibs
+  copyDylib
+  copyAndroidTools
   copyHeaders
   copyTools
   copySnapshotBlobIfNeeded
