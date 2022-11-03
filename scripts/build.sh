@@ -97,17 +97,6 @@ function buildArch()
   local arch=$1
   local platform_arch=$(normalize_arch_for_platform $arch)
 
-  local target=''
-  if [[ ${PLATFORM} = "android" ]]; then
-    target="libv8android"
-  elif [[ ${PLATFORM} = "ios" ]]; then
-    target="libv8"
-  elif [[ ${PLATFORM} = "macos_android" ]]; then
-    :
-  else
-    exit 1
-  fi
-
   echo "Build v8 ${arch} variant NO_INTL=${NO_INTL} NO_JIT=${NO_JIT}"
   gn gen --args="${GN_ARGS_BASE} ${GN_ARGS_BUILD_TYPE} target_cpu=\"${arch}\"" "out.v8.${arch}"
 
@@ -116,7 +105,7 @@ function buildArch()
     copySnapshot $arch
     copyMkcodecache $arch
  else
-    date ; ninja ${NINJA_PARAMS} -C "out.v8.${arch}" ${target} run_mksnapshot_default mkcodecache_group ; date
+    date ; ninja ${NINJA_PARAMS} -C "out.v8.${arch}" run_mksnapshot_default mkcodecache_group ; date
     copyLib $arch
     copySnapshot $arch
     copyMkcodecache $arch
@@ -127,15 +116,6 @@ function copyLib()
 {
   local arch=$1
   local platform_arch=$(normalize_arch_for_platform $arch)
-
-  local target=''
-  if [[ ${PLATFORM} = "android" ]]; then
-    target="libv8android"
-  elif [[ ${PLATFORM} = "ios" ]]; then
-    target="libv8"
-  else
-    exit 1
-  fi
 
   mkdir -p "${BUILD_DIR}/lib/${platform_arch}"
   cp -rf "out.v8.${arch}" "${BUILD_DIR}/lib/${platform_arch}/"
