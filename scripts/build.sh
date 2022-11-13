@@ -1,7 +1,7 @@
 #!/bin/bash -e
 source $(dirname $0)/env.sh
-BUILD_TYPE="Release"
-# BUILD_TYPE="Debug"
+# BUILD_TYPE="Release"
+BUILD_TYPE="Debug"
 
 # $1 is ${PLATFORM} which parse commonly from env.sh
 ARCH=$2
