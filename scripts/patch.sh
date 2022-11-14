@@ -31,6 +31,9 @@ V8_PATCHSET_ANDROID=(
 )
 
 V8_PATCHSET_IOS=(
+
+  "v8_ios_inspector.patch"
+
   # V8 shared library support
   # "v8_shared_library_ios.patch"
 
