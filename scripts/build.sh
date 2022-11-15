@@ -19,6 +19,7 @@ GN_ARGS_BASE="
   v8_enable_debugging_features=false
   v8_enable_webassembly=false
   is_official_build=true
+  use_thin_lto=true
 "
 
 if [[ ${PLATFORM} = "macos_android" ]]; then
