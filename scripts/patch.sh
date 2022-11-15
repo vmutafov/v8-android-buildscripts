@@ -6,6 +6,8 @@ source $(dirname $0)/env.sh
 ######################################################################################
 V8_PATCHSET_ANDROID=(
   "v8_monolith_snapshot.patch"
+
+  "v8_android_inspector.patch"
   
   # V8 shared library support
   # "v8_shared_library.patch"
